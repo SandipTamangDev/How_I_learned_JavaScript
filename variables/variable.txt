@@ -1,0 +1,7 @@
+JavaScript Variable;
+
+let
+const
+var
+
+var = 
