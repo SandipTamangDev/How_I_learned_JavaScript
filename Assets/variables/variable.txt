@@ -1,7 +1,15 @@
 JavaScript Variable;
 
+scope
+    function
+    block
+    
+Temporal dead zone
+
 let
 const
 var
 
-var = 
+global
+function scoped
+block scoped
