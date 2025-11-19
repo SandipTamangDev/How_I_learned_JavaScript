@@ -72,6 +72,11 @@ nav ul li a:hover {
     color: var(--txt-white);
 }
 
+.active {
+    background-color: var(--bg-secondary);
+    color: var(--txt-white);
+}
+
 @media (min-width: 768px) {
     nav ul {
         flex-direction: row;
@@ -107,4 +112,5 @@ main {
     font-size: 2rem;
     text-align: center;
 }
+
 

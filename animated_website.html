@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindset Trap</title>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Inter", Arial, sans-serif;
+  }
+
+  h1 {
+    position: relative;
+    z-index: 2;
+    font-size: 6vw;
+    font-weight: 300;
+    line-height: 1.35;
+    max-width: 88%;
+    color: #ffffffee;
+    letter-spacing: 0.3vw;
+
+    text-shadow: 
+      0 0 6px #ffffff22,
+      0 0 14px #ffffff11;
+
+    animation: fadeIn 1.4s ease forwards;
+    opacity: 0;
+  }
+
+  .bold {
+    font-weight: 600;
+    letter-spacing: 0.1vw;
+    color: #fff;
+    text-shadow:
+      0 0 8px #ffffff66,
+      0 0 16px #ffffff44;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>
+  “You say you want <span class="bold">change</span>,  
+  but every day you repeat the same <span class="bold">excuses</span>.<br>
+  Which one are you lying to yourself with today?”
+</h1>
+
+<canvas id="bgCanvas"></canvas>
+
+<script>
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let w, h;
+
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+/* SHARP PRESSURE RISING PARTICLES */
+const particles = [];
+const particleCount = 70;
+
+for (let i = 0; i < particleCount; i++) {
+  particles.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 1.8 + 0.5,
+    speed: Math.random() * 1.2 + 0.8,     // faster + sharper
+    drift: (Math.random() - 0.5) * 0.3    // slight horizontal shake = tension
+  });
+}
+
+function draw() {
+  // darker, more aggressive fade
+  ctx.fillStyle = "rgba(0,0,0,0.25)";
+  ctx.fillRect(0, 0, w, h);
+
+  ctx.fillStyle = "rgba(255,255,255,0.8)";
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+
+    p.y -= p.speed;
+    p.x += p.drift;
+
+    if (p.y < -10) p.y = h + 10;
+    if (p.x < -10) p.x = w + 10;
+    if (p.x > w + 10) p.x = -10;
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
